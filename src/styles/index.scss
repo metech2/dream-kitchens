@@ -1,0 +1,326 @@
+:root{
+    --background-color: #fff;
+    --background-light: #fff;
+    --shadow-color: rgba(82, 45, 6, 0.162);
+    --primary-color : rgb(243, 108, 153);
+    --text-color: #0A0A0A;
+    --text-light: #575757;
+    --font-size: 16px;
+    --animation-speed: 1;
+}
+
+@function getAnimationDuration($duration: number){
+    @return calc($duration * var(--animation-speed));
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-size: var(--font-size);
+    font-family: 'Roboto Slab', serif;
+    padding-top: 55px;
+}
+a{
+    text-decoration: none;
+}
+img{
+    object-fit: cover;
+}
+
+.btn{
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: .75em .1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.1em;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px var(--shadow-color);
+    cursor: pointer;
+    &:hover{
+        box-shadow: 0 1px 3px var(--shadow-color);
+    }
+}
+.profiles{
+    .gradient-custom {
+        /* fallback for old browsers */
+        background: #f6d365;
+      
+        /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1));
+      
+        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        background: linear-gradient(to right bottom, rgba(246, 211, 101, 1), rgba(253, 160, 133, 1))
+      }
+}
+
+.custom-image{
+    background-color: pink;
+    height: 0;
+    width: 100%;
+    position: relative;
+    img{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+@import "partials/navbar.scss";
+
+.section{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 3vw;
+    .title{
+        color: var(--text-color);
+        font-size: 2.5em;
+        margin-bottom: .25em;
+        font-weight: 900;
+    }
+    .info{
+        color: var(--text-light);
+        font-size: 1em;
+        letter-spacing: 1px;
+        line-height: 1.3;
+        margin-bottom: 1.25em;
+
+    }
+    .col{
+        width: 50%;
+    }
+}
+
+@import "partials/hero-section.scss";
+@import "partials/improve-section.scss";
+@import "partials/quote-section.scss";
+@import "partials/footer.scss";
+@import "partials/previous-searches.scss";
+
+.recipes-container{
+    display: grid;
+    grid-template-columns: repeat(outo-fit, minmax(220px, 1fr));
+    grid-gap: 1.5em;
+}
+.recipe-card{
+    border-radius: 2%;
+    overflow: hidden;
+    grid-gap: 1.2em;
+    box-shadow: 0 3px 10px var(--shadow-color);
+}
+.recipe-title{
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: .5em;
+    color: var(--text-color);
+}
+.recipe-desc{
+    color: var(--text-light);
+    font-size: .9em;
+    letter-spacing: 1px;
+}
+.view-btn{
+    font-size: 1em;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-top: .75em;
+    display: inline-block;
+}
+
+.main{
+    padding-block: 3vw;
+}
+.navbar{
+    height: 55px;
+    box-shadow: 0 3px 6px var(--shadow-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo{
+        font-size: 1.2em;
+        font-weight: bolder;
+        color: var(--primary-color);
+        text-shadow: 0 1px 3px var(--shadow-color);
+        span{
+            color: var(--text-color);
+        }
+    }
+    .nav-links{
+        a{
+            margin-left: 1em;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            font-size: .9em;
+            &::before{
+                content: '';
+                display: inline-block;
+                height: 3px;
+                width: 100%;
+                background-color: var(--primary-color);
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                transform: scaleX(0);
+                transition: getAnimationDuration(.2s) ease-in-out;
+            }
+            &:hover{
+                &::before{
+                    transform: scaleX(1);
+                }
+            }
+            &.active{
+                color: var(--primary-color);
+            }
+        }
+    }
+    .sidebar-btn{
+        height: 28px;
+        width: 35px;
+        position: relative;
+        display: none;
+        .bar{
+            border-radius: 5px;
+            height: 6px;
+            width: 100%;
+            background-color: var(--text-color);
+            position: absolute;
+            transition: transform getAnimationDuration(.5s);
+            &:nth-child(1){
+                top: 0;
+            }
+            &:nth-child(2){
+                top: 50%;
+                transform-origin: right;
+                transform: scaleX(.9) translateY(-50%);
+            }
+            &:nth-child(3){
+                top: 100%;
+                transform-origin: right;
+                transform: scaleX(.8) translateY(-100%);
+            }
+        }
+        &.active{
+            .bar{
+                transform-origin: center;
+                top: 50%;
+                &:nth-child(1){
+                    transform: translate(0, -50%) scale(1) rotate(45deg) ;
+                }
+                &:nth-child(2){
+                    transform: scaleX(0) translateY(-50%);
+                }
+                &:nth-child(3){
+                    transform: translate(0, -50%) scale(1) rotate(-45deg) ;
+                }
+            }
+        }
+    }
+}
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 260px;
+    background-color: var(--background-color);
+    box-shadow: 0 0 0 1000px rgba(0,0,0,0.2),
+                3px 0 5px var(--shadow-color);
+    animation: getAnimationDuration(.3s) slideInLeft;
+    .sidebar-link{
+        display: block;
+        padding: .5em 1em;
+        border-left: .4em solid transparent;
+        margin-bottom: 1em;
+        color: var(--text-color);
+        font-size: 1.1em;
+        transform: translateX(-100%);
+        animation: getAnimationDuration(.3s) slideInLeft forwards;
+        @for $i from 1 through 3{
+            &:nth-child(#{$i}){
+                animation-delay: #{$i * .1}s;
+            }
+        }
+
+        &.active{
+            border-left-color: var(--primary-color);
+        }
+        &:hover{
+            border-left-color: var(--primary-color);
+            background-color: rgba(0,0,0,0.05);
+        }
+        svg{
+             width: 1.2em;
+             margin-right: .5em;
+        }
+    }
+}
+
+.container{
+    padding-inline: 25vw;
+}
+@import "partials/animations.scss";
+
+@media screen and (max-width: 1050px){
+    .container{
+        padding-inline: 12vw;
+    }
+}
+@media screen and (max-width: 768px){
+    .navbar{
+        .nav-links{
+            display: none;
+        }
+        .sidebar-btn{
+            display: block;
+        }
+    }
+    .section{
+        col{
+            width: 100%;
+            padding: 0 !important;
+            text-align: center;
+            margin-bottom: 2em;
+        }
+    }
+    .skill-item{
+        display: inline-block;
+        margin: .75em;
+    }
+    .section.improve-skills .btn{
+        display: block;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .container{
+        padding-inline: 6vw;
+    }
+    .footer{
+        grid-template-columns: repeat(4, 1fr);
+        .footer-section:nth-child(1){
+            grid-column: span 4;
+        }
+        .footer-section:nth-child(2), .footer-section:nth-child(3){
+        }
+    }
+}
+@media screen and (max-width: 480px){
+    .container{
+        padding-inline: 3vw;
+    }
+}
