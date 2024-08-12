@@ -1,33 +1,25 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom"
+import { Outlet } from 'react-router-dom';
+import Navbar from './components/navbar';
+import Footer from './components/Footer';
+import './App.css'; // Import the CSS file
+import { CssBaseline } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import Navbar from "./components/navbar";
-import Footer from "./components/Footer";
+const defaultTheme = createTheme();
 
-import Home from "./pages/Home";
-import Recipes from "./pages/Recipes";
-import Settings from "./pages/Profiles";
-import SignUp from "./pages/SignUp";
-import SignIn from "./pages/SignIn";
 function App() {
   return (
-    <Router> 
-      < Navbar/>
-      <div className="container main">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/recipes" element={<Recipes />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signin" element={<SignIn />} />
-      </Routes>
+    <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
+      <div className="app-container">
+        <Navbar />
+        <div className="content">
+          <Outlet />
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </Router>
-  )
+    </ThemeProvider>
+  );
 }
 
 export default App;
