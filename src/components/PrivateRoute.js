@@ -10,7 +10,7 @@ const PrivateRoute = ({ children }) => {
     return <span className="loading loading-dots loading-lg"></span>;
   }
 
-  if (user && isEmailVerfied) {
+  if (user) {
     console.log('User:', user);
     return children;
   }
