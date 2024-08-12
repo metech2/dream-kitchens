@@ -19,7 +19,7 @@ import { LockOutlined } from '@mui/icons-material';
 import Copyright from '../components/Copyright';
 
 const Login = () => {
-  const { loginUser, user, isEmailVerified } = useContext(AuthContext);
+  const { loginUser, user, isEmailVerified, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState('');
 
@@ -30,7 +30,10 @@ const Login = () => {
     loginUser(email, password)
       .then((result) => {
         console.log(result);
-        if (user && isEmailVerified) {
+        if (user) {
+          if (loading) {
+            return <span className="loading loading-dots loading-lg"></span>;
+          }
           navigate('/');
         } else {
           navigate('/signin');
